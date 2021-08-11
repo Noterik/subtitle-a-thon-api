@@ -1,0 +1,6 @@
+Hello {{fullname}},
+
+You have successfully activated your QANDR account. You can access your account anytime with the details below:
+
+user: {{email}}
+password: only known by you

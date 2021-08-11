@@ -1,0 +1,19 @@
+Hello {{fullname}},
+
+Thank you for your registration!
+
+Your application is being processed. Within 5 days you’ll get a message from us confirming if you can join us on Europeana XX: Subtitle-a-thon Challenge Warsaw. 
+
+Stay tuned!
+
+Questions? We’re here to help: subtitleathon@fina.gov.pl 
+
+------
+
+Dziękujemy za rejestrację!
+
+Twoje zgłoszenie jest weryfikowane. W ciągu 5 dni otrzymasz od nas informację, czy możesz wziąć udział w Europeana XX: Subtitle-a-thon Challenge Warsaw.
+
+Stay tuned!
+
+Masz pytania? Chętnie pomożemy: subtitleathon@fina.gov.pl

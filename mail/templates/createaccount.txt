@@ -1,0 +1,13 @@
+Hello {{fullname}},
+
+As one of the selected participants we ask you to do one last step before the Subtitle-a-thon Challenge Frankfurt can start. Fill in the details on this sign up page https://www.subtitleathon.eu/sign-up?id={{signup_hash}} to complete your account and get ready for our opening session on Tuesday, 6th July at 16:00 CET. Please make sure you have your account created before we kick off on Tuesday.
+
+Didn’t get a link to the meeting yet? No worries. We’re here to help: subtitleathon@dff.film
+
+------
+
+Hallo {{fullname}},
+
+als eine:r der ausgewählten Teilnehmer:innen bitten wir dich, um einen letzten Schritt, bevor die Subtitle-a-thon Challenge Frankfurt beginnen kann. Füll bitte die Details auf dieser Anmeldeseite aus https://www.subtitleathon.eu/sign-up?id={{signup_hash}}, um deinen Account für unser Kick-off-Meeting am Dienstag, den 6. Juli um 16:00 Uhr MEZ zu vervollständigen. Bitte stell sicher, dass du deinen Account erstellt hast, bevor wir am Dienstag loslegen.
+                                            
+Du hast noch keinen Link zur Kick-off-Sitzung erhalten? Kein Problem! Schreib uns an: subtitleathon@dff.film

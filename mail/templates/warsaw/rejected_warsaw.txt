@@ -1,0 +1,15 @@
+Hello {{fullname}},
+
+You are on a waiting list…
+
+Unfortunately the list of participants of Europeana XX: Subtitle-a-thon Challenge Warsaw is already completed. We will keep you informed if the situation changes.
+
+Questions? We’re always here to help: subtitleathon@fina.gov.pl
+
+------
+
+Jesteś na liście rezerwowej…
+
+Niestety lista uczestników Europeana XX: Subtitle-a-thon Challenge Warsaw została zamknięta. Gdy tylko zwolnią się miejsca, niezwłocznie będziemy Cię informować.
+
+Masz pytania? Zawsze chętnie pomożemy: subtitleathon@fina.gov.pl

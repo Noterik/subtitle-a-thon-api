@@ -1,0 +1,3 @@
+Hello {{username}},\n\n
+You have successfully joined the {{eventtitle}}. This event will run from {{startdate}} to {{enddate}}.\n\n
+You can always visit the Subtitle-a-thon website on https://www.subtitle-a-thon.eu\n

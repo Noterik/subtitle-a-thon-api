@@ -1,0 +1,19 @@
+Hello {{fullname}},
+
+Thank you for your registration!
+
+Your application is being processed. Within 5 days you’ll get a message from us confirming if you can join us on Europeana XX: Subtitle-a-thon Challenge Frankfurt. 
+
+Stay tuned!
+
+Questions? We’re here to help: subtitleathon@dff.film  
+
+------
+
+Vielen Dank für deine Anmeldung!
+
+Deine Anmeldung wird bearbeitet. Innerhalb von 5 Tagen erhältst du eine Nachricht von uns, ob du an der Europeana XX: Subtitle-a-thon Challenge Frankfurt teilnehmen kannst.
+
+Stay tuned!
+
+Noch Fragen? Dann schreib uns gerne an: subtitleathon@dff.film

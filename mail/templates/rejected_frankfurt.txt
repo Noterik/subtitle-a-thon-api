@@ -1,0 +1,15 @@
+Hello {{fullname}},
+
+You are on a waiting list…
+
+Unfortunately the list of participants of Europeana XX: Subtitle-a-thon Challenge Frankfurt is already completed. We will keep you informed if the situation changes.
+
+Questions? We’re always here to help: subtitleathon@dff.film
+
+------
+
+Du bist auf unserer Warteliste...
+
+Leider ist die Liste der Teilnehmer:innen der Europeana XX: Subtitle-a-thon Challenge Frankfurt bereits vollständig. Wir werden dich auf dem Laufenden halten, falls sich etwas daran ändert.
+
+Noch Fragen? Schreib uns gerne an: subtitleathon@dff.film

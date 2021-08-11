@@ -1,0 +1,8 @@
+Hello {{username}},\n\n
+We received a request for a password reset of your account.\n\n
+Device: {{browserstring}}.\n
+Location: {{region}}, {{country}}\n
+Date: {{date}}\n\n
+If you did not make this request, please ignore this email. But if you did, set a new password within the next 24 hours  by pressing the link below:\n\n
+{{resetlink}}\n\n
+If you have any issues resetting your password, do not hesitate to contact us.\n\n

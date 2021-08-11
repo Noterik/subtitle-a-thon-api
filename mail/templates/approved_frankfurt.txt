@@ -1,0 +1,23 @@
+Hello {{fullname}},
+
+You are in!
+
+Welcome to Europeana XX: Subtitle-a-thon Challenge Frankfurt! We are happy to confirm your participation in the event. Already now make sure to circle in your agenda July 6th 16:00-18:00 CET for the kick-off meeting.
+
+In a few days we will share all the details necessary for you to join the adventure!
+
+For more info go to: https://www.subtitleathon.eu
+
+Questions? We’re always here to help: subtitleathon@dff.film 
+
+------
+
+Du bist dabei!
+
+Willkommen zur Europeana XX: Subtitle-a-thon Challenge Frankfurt! Wir bestätigen hiermit deine Teilnahme an der Veranstaltung. Merke dir schon jetzt den 6. Juli 16:00-18:00 Uhr für das Kick-Off-Meeting in deinem Kalender vor.
+
+In ein paar Tagen werden wir alle Details rund um den Ablauf bekannt geben!
+
+Weitere Informationen findest du unter: https://www.subtitleathon.eu  
+
+Noch Fragen? Schreib uns gerne an: subtitleathon@dff.film

@@ -1,0 +1,35 @@
+Hello {{fullname}},
+
+Thank you for your confirmation! Here’s the link to our Kick-off session:
+
+Thema: Subtittle-a-thon Kick off
+
+Date: July 6 2021 4:00 PM Amsterdam, Berlin, Rome, Stockholm, Vienna
+
+Zoom-Meeting link: https://dff-film.zoom.us/j/99856052300?pwd=djJjNTVOZFJ6bjJvWjJtMVM2Rnp1Zz09
+
+Meeting-ID: 998 5605 2300 
+
+Room passcode: 878332					
+
+The session will take around two hours and we will use it to introduce you to the format and its rules, the subtitling tool and the film collections we have gathered for you to work with.
+
+See you on Tuesday, 6th July at 16:00 CET!
+
+------
+
+Vielen Dank für deine Bestätigung! Hier ist der Link zu unserem Kick-off-Meeting:
+
+Thema: Subtittle-a-thon Kick off
+
+Uhrzeit: 6.Juli.2021 04:00 PM Amsterdam, Berlin, Rom, Stockholm, Wien
+
+Zoom-Meeting beitreten: https://dff-film.zoom.us/j/99856052300?pwd=djJjNTVOZFJ6bjJvWjJtMVM2Rnp1Zz09
+
+Meeting-ID: 998 5605 2300 
+
+Kenncode: 878332
+
+Das Meeting wird ca. zwei Stunden dauern. Wir werden die Zeit nutzen, um dir das Format und seine Regeln, das Untertitelungs-Tool und die von uns zusammengestellten Filmsammlungen vorzustellen.
+
+Wir sehen uns am Dienstag, 6. Juli um 16:00 Uhr MEZ!
