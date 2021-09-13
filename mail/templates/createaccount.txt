@@ -1,13 +1,15 @@
 Hello {{fullname}},
 
-As one of the selected participants we ask you to do one last step before the Subtitle-a-thon Challenge Frankfurt can start. Fill in the details on this sign up page https://www.subtitleathon.eu/sign-up?id={{signup_hash}} to complete your account and get ready for our opening session on Tuesday, 6th July at 16:00 CET. Please make sure you have your account created before we kick off on Tuesday.
+As one of the selected participants we ask you to do one last step before the Amsterdam Subtitle-a-thon Challenge can start. 
+Fill in the details on this sign up page https://www.subtitleathon.eu/sign-up?id={{signup_hash}} to complete your account and get ready for our opening session on Sunday 26th at 15:00 CEST. Please make sure you have your account created before we kick off on Sunday.
 
-Didn’t get a link to the meeting yet? No worries. We’re here to help: subtitleathon@dff.film
+Didn’t get a link to the meeting yet? No worries. We’re here to help: subtitles@euscreen.eu
 
 ------
 
 Hallo {{fullname}},
 
-als eine:r der ausgewählten Teilnehmer:innen bitten wir dich, um einen letzten Schritt, bevor die Subtitle-a-thon Challenge Frankfurt beginnen kann. Füll bitte die Details auf dieser Anmeldeseite aus https://www.subtitleathon.eu/sign-up?id={{signup_hash}}, um deinen Account für unser Kick-off-Meeting am Dienstag, den 6. Juli um 16:00 Uhr MEZ zu vervollständigen. Bitte stell sicher, dass du deinen Account erstellt hast, bevor wir am Dienstag loslegen.
-                                            
-Du hast noch keinen Link zur Kick-off-Sitzung erhalten? Kein Problem! Schreib uns an: subtitleathon@dff.film
+Als een van de geselecteerde deelnemers vragen we je nog een laatste stap te doen voordat de Amsterdam Subtitle-a-thon Uitdaging kan beginnen.
+Vul de details op deze aanmeldingspagina in https://www.subtitleathon.eu/sign-up?id={{signup_hash}} om je account te voltooien en je voor te bereiden op onze openingssessie. Zorg ervoor dat je je account hebt aangemaakt voordat we op zondag beginnen.
+
+Nog geen link naar de meeting ontvangen? Geen zorgen. Wij zijn hier om te helpen: subtitles@euscreen.eu

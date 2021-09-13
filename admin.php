@@ -34,7 +34,7 @@ if (isset($_GET["action"])) {
                 
                 //check if the user is admin
                 if ($row['admin'] == true) {
-                    $sql = "SELECT r.registrationid, r.fullname, r.email, r.native_languages, r.foreign_languages, r.accepted, r.rejected, r.nationality, r.signup_hash, r.signupfirststep, r.signupsecondstep, u.username, u.europeana_known, u.location, u.gender, u.age, u.professional_background, u.email_updates FROM registrations AS r LEFT JOIN users as u ON r.email = u.email WHERE eventid = 6";
+                    $sql = "SELECT r.registrationid, r.fullname, r.email, r.native_languages, r.foreign_languages, r.accepted, r.rejected, r.nationality, r.signup_hash, r.signupfirststep, r.signupsecondstep, u.username, u.europeana_known, u.location, u.gender, u.age, u.professional_background, u.email_updates FROM registrations AS r LEFT JOIN users as u ON r.email = u.email WHERE eventid = 7";
                     $result = $conn->query($sql);
 
                     //people are registered
@@ -98,10 +98,10 @@ if (isset($_GET["action"])) {
                             $email = $row['email'];
 
                             // sent approved email
-                            $approvedHTMLMail = file_get_contents("mail/templates/approved_frankfurt.html");
+                            $approvedHTMLMail = file_get_contents("mail/templates/approved_amsterdam.html");
                             $approvedHTMLMail = str_replace("{{fullname}}", $fullname, $approvedHTMLMail);
 
-                            $approvedTextMail = file_get_contents("mail/templates/approved_frankfurt.txt");
+                            $approvedTextMail = file_get_contents("mail/templates/approved_amsterdam.txt");
                             $approvedTextMail = str_replace("{{fullname}}", $fullname, $approvedTextMail);
 
                             sendMail($approvedTextMail, $approvedHTMLMail, "You are in!", $email);
@@ -159,10 +159,10 @@ if (isset($_GET["action"])) {
                             $email = $row['email'];
 
                             // sent rejected email
-                            $rejectedHTMLMail = file_get_contents("mail/templates/rejected_frankfurt.html");
+                            $rejectedHTMLMail = file_get_contents("mail/templates/rejected_amsterdam.html");
                             $rejectedHTMLMail = str_replace("{{fullname}}", $fullname, $rejectedHTMLMail);
 
-                            $rejectedTextMail = file_get_contents("mail/templates/rejected_frankfurt.txt");
+                            $rejectedTextMail = file_get_contents("mail/templates/rejected_amsterdam.txt");
                             $rejectedTextMail = str_replace("{{fullname}}", $fullname, $rejectedTextMail);
 
                             sendMail($rejectedTextMail, $rejectedHTMLMail, "You are on a waiting list...", $email);
@@ -273,7 +273,7 @@ if (isset($_GET["action"])) {
                                 $createacountTextMail = file_get_contents("mail/templates/userlinkedtoevent.txt");
                                 $createacountTextMail = str_replace("{{fullname}}", $fullname, $createacountTextMail);
 
-                                sendMail($createacountTextMail, $createacountHTMLMail, "You joined the Subtitle-a-thon Frankfurt event", $email);
+                                sendMail($createacountTextMail, $createacountHTMLMail, "You joined the Subtitle-a-thon Amsterdam event", $email);
                             }
                         }
                     }
@@ -417,7 +417,7 @@ if (isset($_GET["action"])) {
                         
                 //check if the user is admin
                 if ($row['admin'] == 1) {
-                    $sql = "SELECT i.id, i.item_key, i.eupsid, i.language, i.characters, i.manifest, i.eventid, i.itemid, i.reviewerid, i.review_done, i.review_quality, i.review_appropriate, i.review_flow, i.review_grammatical, i.review_comments, u.username FROM item_subtitles AS i LEFT JOIN users AS u ON i.userid = u.userid WHERE finalized = TRUE AND eventid = 6";
+                    $sql = "SELECT i.id, i.item_key, i.eupsid, i.language, i.characters, i.manifest, i.eventid, i.itemid, i.reviewerid, i.review_done, i.review_quality, i.review_appropriate, i.review_flow, i.review_grammatical, i.review_comments, u.username FROM item_subtitles AS i LEFT JOIN users AS u ON i.userid = u.userid WHERE finalized = TRUE AND eventid =7";
                     $result = $conn->query($sql);
 
                     $conn2 = OpenCon2();
@@ -569,10 +569,10 @@ if (isset($_GET["action"])) {
                         $response['success']['message'] = $fullname;
 
                         // sent opening session details email
-                        $HTMLMail = file_get_contents("mail/templates/frankfurt/opening_session_details.html");
+                        $HTMLMail = file_get_contents("mail/templates/amsterdam/opening_session_details.html");
                         $HTMLMail = str_replace("{{fullname}}", $fullname, $HTMLMail);
 
-                        $TextMail = file_get_contents("mail/templates/frankfurt/opening_session_details.txt");
+                        $TextMail = file_get_contents("mail/templates/amsterdam/opening_session_details.txt");
                         $TextMail = str_replace("{{fullname}}", $fullname, $TextMail);
 
                         sendMail($TextMail, $HTMLMail, "Are you ready?", $email);
@@ -623,10 +623,10 @@ if (isset($_GET["action"])) {
                             $response['success']['message'] = $fullname;
     
                             // sent opening session details email
-                            $HTMLMail = file_get_contents("mail/templates/frankfurt/confirmation_link.html");
+                            $HTMLMail = file_get_contents("mail/templates/amsterdam/confirmation_link.html");
                             $HTMLMail = str_replace("{{fullname}}", $fullname, $HTMLMail);
     
-                            $TextMail = file_get_contents("mail/templates/frankfurt/confirmation_link.txt");
+                            $TextMail = file_get_contents("mail/templates/amsterdam/confirmation_link.txt");
                             $TextMail = str_replace("{{fullname}}", $fullname, $TextMail);
     
                             sendMail($TextMail, $HTMLMail, "Kick-off session details", $email);

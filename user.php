@@ -600,10 +600,10 @@ if (isset($_GET["action"])) {
                 $row = $result->fetch_assoc();
                 
                 //allow existing registrations to register also for other events
-                if ($row['eventid'] == "6") {
+                if ($row['eventid'] == "7") {
                     $response['error']['email'] = "Email address already in use";
                 } else {
-                    $sql = "UPDATE registrations SET eventid = 6, accepted = FALSE, rejected = FALSE, fullname = '".$fullname."', nationality = '".$nationality."', native_languages = '".$nativelanguages."', foreign_languages = '".$foreignlanguages."' WHERE email = '".$email."'";
+                    $sql = "UPDATE registrations SET eventid = 7, accepted = FALSE, rejected = FALSE, fullname = '".$fullname."', nationality = '".$nationality."', native_languages = '".$nativelanguages."', foreign_languages = '".$foreignlanguages."' WHERE email = '".$email."'";
 
                     $result = $conn->query($sql);
                 
@@ -629,7 +629,7 @@ if (isset($_GET["action"])) {
                 print(json_encode($response));
                 break; 
             } else {
-                $sql = "INSERT INTO registrations(fullname, email, nationality, native_languages, foreign_languages, eventid) VALUES ('".$fullname."', '".$email."', '".$nationality."', '".$nativelanguages."', '".$foreignlanguages."', 6)";
+                $sql = "INSERT INTO registrations(fullname, email, nationality, native_languages, foreign_languages, eventid) VALUES ('".$fullname."', '".$email."', '".$nationality."', '".$nativelanguages."', '".$foreignlanguages."', 7)";
                 $result = $conn->query($sql);
                 
                 if(!$result) {

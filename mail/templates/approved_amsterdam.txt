@@ -1,0 +1,23 @@
+Hello {{fullname}},
+
+You are in!
+
+Welcome to Europeana XX: Subtitle-a-thon Challenge Amsterdam! We are happy to confirm your participation in the event. Already now make sure to circle in your agenda September 26th 15.00-17.00 CEST for the kick-off meeting.
+
+In a few days we will share all the details necessary for you to join the adventure!
+
+For more info go to: https://www.subtitleathon.eu
+
+Questions? We’re always here to help: subtitles@euscreen.eu 
+
+------
+
+Je bent in!
+
+Welkom bij Europeana XX: Subtitle-a-thon Uitdaging Amsterdam! We bevestigen graag uw deelname aan het evenement. Zet 26 september 15.00-17.00 CEST alvast in je agenda voor de kick-off meeting.
+
+Over een paar dagen delen we alle details die nodig zijn om deel te nemen aan het avontuur!
+
+Voor meer informatie: https://www.subtitleathon.eu  
+
+Vragen? Wij zijn hier om te helpen: subtitles@euscreen.eu

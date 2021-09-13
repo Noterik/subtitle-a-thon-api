@@ -11,7 +11,7 @@ $result = $conn->query($sql);
 print(date("F j, Y, G:i:s").": ".mysqli_num_rows($result)." items deleted");
 
 //create statistics
-$sql = "SELECT characters, milliseconds FROM item_subtitles WHERE finalized = TRUE AND eventid = 6";
+$sql = "SELECT characters, milliseconds FROM item_subtitles WHERE finalized = TRUE AND eventid = 7";
 $result = $conn->query($sql);
 
 $characters = 0;
@@ -30,7 +30,7 @@ $data = array();
 $data['characters'] = $characters;
 $data['milliseconds'] = $milliseconds;
 
-$sql = "SELECT COUNT(DISTINCT language) AS languages FROM item_subtitles WHERE finalized = TRUE AND eventid = 6";
+$sql = "SELECT COUNT(DISTINCT language) AS languages FROM item_subtitles WHERE finalized = TRUE AND eventid = 7";
 $result = $conn->query($sql);
 
 if (mysqli_num_rows($result) == 1) {
@@ -38,7 +38,7 @@ if (mysqli_num_rows($result) == 1) {
     $data['languages'] = $row['languages'];
 }
 
-file_put_contents("/var/www/api.subtitleathon.eu/statistics_6.json", json_encode($data));
+file_put_contents("/var/www/api.subtitleathon.eu/statistics_7.json", json_encode($data));
 
 $sql = "select 
 t.username,
@@ -47,7 +47,7 @@ from (
 select users.username, SUM(item_subtitles.characters) as characters
 from item_subtitles
 inner join users on item_subtitles.userid = users.userid
-where eventid = 6 and finalized = true
+where eventid =7 and finalized = true
 group by users.userid
 order by characters DESC LIMIT 5
 ) t";
@@ -62,7 +62,7 @@ if (mysqli_num_rows($result) > 0) {
     }
 }
 
-file_put_contents("/var/www/api.subtitleathon.eu/leaderboard_6.json", json_encode($data));
+file_put_contents("/var/www/api.subtitleathon.eu/leaderboard_7.json", json_encode($data));
 
 $sql2 = "select
     username,
@@ -117,7 +117,7 @@ from (
     i.itemid
     from item_subtitles as i
     inner join users as u on i.userid = u.userid
-    where i.eventid = 6 and i.finalized = true
+    where i.eventid = 7 and i.finalized = true
 ) t";
 
 $result = $conn->query($sql);

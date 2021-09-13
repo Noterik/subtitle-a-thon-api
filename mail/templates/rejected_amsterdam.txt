@@ -1,0 +1,16 @@
+Hello {{fullname}},
+
+You are on a waiting list…
+
+Unfortunately, the list of participants of Europeana XX: Subtitle-a-thon Challenge Amsterdam is already complete. We will keep you informed if the situation changes.
+
+Questions? We’re always here to help: subtitles@euscreen.eu
+
+------
+
+Je staat op een wachtlijst...
+
+Helaas is de deelnemerslijst van Europeana XX: Subtitle-a-thon Uitdaging Amsterdam al compleet. Wij houden u op de hoogte als de situatie verandert.
+
+Vragen? Wij zijn hier om te helpen:subtitles@euscreen.eu
+
