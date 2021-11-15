@@ -52,7 +52,7 @@ if (isset($_GET["action"])) {
                             print(json_encode($response));
                         } else {
                             CloseCon($conn);
-                            $response['results'] = ['empty'];
+                            $response['results'] = [];
                             header('Content-Type: application/json');
                             print(json_encode($response));
                         }
