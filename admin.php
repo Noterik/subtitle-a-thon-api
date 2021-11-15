@@ -20,36 +20,45 @@ if (isset($_GET["action"])) {
 
     switch ($action) {
         case "registrations":
-            $conn = OpenCon();
             $response = array();
 
-            $sessionid = $conn->real_escape_string($_COOKIE['sessionid']);
-            
-            $sql = "SELECT s.userid, u.admin FROM sessions AS s LEFT JOIN users AS u ON s.userid = u.userid WHERE sessionid = '". $conn->real_escape_string($sessionid)."' AND created_at BETWEEN NOW() - INTERVAL 30 DAY AND NOW()";
-            $result = $conn->query($sql);
+            if ($subaction !== "") {
+                $conn = OpenCon();
+        
+                $sessionid = $conn->real_escape_string($_COOKIE['sessionid']);
+                $eventid = $conn->real_escape_string($subaction);
 
-            //admin user is authenticated
-            if (mysqli_num_rows($result) === 1) {
-                $row = $result->fetch_assoc();
-                
-                //check if the user is admin
-                if ($row['admin'] == true) {
-                    $sql = "SELECT r.registrationid, r.fullname, r.email, r.native_languages, r.foreign_languages, r.accepted, r.rejected, r.nationality, r.signup_hash, r.signupfirststep, r.signupsecondstep, u.username, u.europeana_known, u.location, u.gender, u.age, u.professional_background, u.email_updates FROM registrations AS r LEFT JOIN users as u ON r.email = u.email WHERE eventid = 7";
-                    $result = $conn->query($sql);
+                $sql = "SELECT s.userid, u.admin FROM sessions AS s LEFT JOIN users AS u ON s.userid = u.userid WHERE sessionid = '". $conn->real_escape_string($sessionid)."' AND created_at BETWEEN NOW() - INTERVAL 30 DAY AND NOW()";
+                $result = $conn->query($sql);
 
-                    //people are registered
-                    if (mysqli_num_rows($result) > 0) {
-                        //loop over all registrations                    
-                        while ($row = $result->fetch_assoc()) {
-                            $response['results'][] = $row;
+                //admin user is authenticated
+                if (mysqli_num_rows($result) === 1) {
+                    $row = $result->fetch_assoc();
+                    
+                    //check if the user is admin
+                    if ($row['admin'] == true) {
+                        $sql = "SELECT r.registrationid, r.fullname, r.email, r.native_languages, r.foreign_languages, r.accepted, r.rejected, r.nationality, r.signup_hash, r.signupfirststep, r.signupsecondstep, u.username, u.europeana_known, u.location, u.gender, u.age, u.professional_background, u.email_updates FROM registrations AS r LEFT JOIN users as u ON r.email = u.email WHERE eventid = ".$eventid;
+                        $result = $conn->query($sql);
+
+                        //people are registered
+                        if (mysqli_num_rows($result) > 0) {
+                            //loop over all registrations                    
+                            while ($row = $result->fetch_assoc()) {
+                                $response['results'][] = $row;
+                            }
+
+                            CloseCon($conn);
+                            header('Content-Type: application/json');
+                            print(json_encode($response));
+                        } else {
+                            CloseCon($conn);
+                            $response['results'] = ['empty'];
+                            header('Content-Type: application/json');
+                            print(json_encode($response));
                         }
-
-                        CloseCon($conn);
-                        header('Content-Type: application/json');
-                        print(json_encode($response));
                     } else {
                         CloseCon($conn);
-                        $response['results'] = ['empty'];
+                        $response['error']['user'] = "Not allowed";
                         header('Content-Type: application/json');
                         print(json_encode($response));
                     }
@@ -60,8 +69,7 @@ if (isset($_GET["action"])) {
                     print(json_encode($response));
                 }
             } else {
-                CloseCon($conn);
-                $response['error']['user'] = "Not allowed";
+                $response['error']['event'] = "key not given";
                 header('Content-Type: application/json');
                 print(json_encode($response));
             }
@@ -98,10 +106,10 @@ if (isset($_GET["action"])) {
                             $email = $row['email'];
 
                             // sent approved email
-                            $approvedHTMLMail = file_get_contents("mail/templates/approved_amsterdam.html");
+                            $approvedHTMLMail = file_get_contents("mail/templates/approved_rome.html");
                             $approvedHTMLMail = str_replace("{{fullname}}", $fullname, $approvedHTMLMail);
 
-                            $approvedTextMail = file_get_contents("mail/templates/approved_amsterdam.txt");
+                            $approvedTextMail = file_get_contents("mail/templates/approved_rome.txt");
                             $approvedTextMail = str_replace("{{fullname}}", $fullname, $approvedTextMail);
 
                             sendMail($approvedTextMail, $approvedHTMLMail, "You are in!", $email);
@@ -159,10 +167,10 @@ if (isset($_GET["action"])) {
                             $email = $row['email'];
 
                             // sent rejected email
-                            $rejectedHTMLMail = file_get_contents("mail/templates/rejected_amsterdam.html");
+                            $rejectedHTMLMail = file_get_contents("mail/templates/rejected_rome.html");
                             $rejectedHTMLMail = str_replace("{{fullname}}", $fullname, $rejectedHTMLMail);
 
-                            $rejectedTextMail = file_get_contents("mail/templates/rejected_amsterdam.txt");
+                            $rejectedTextMail = file_get_contents("mail/templates/rejected_rome.txt");
                             $rejectedTextMail = str_replace("{{fullname}}", $fullname, $rejectedTextMail);
 
                             sendMail($rejectedTextMail, $rejectedHTMLMail, "You are on a waiting list...", $email);
@@ -273,7 +281,7 @@ if (isset($_GET["action"])) {
                                 $createacountTextMail = file_get_contents("mail/templates/userlinkedtoevent.txt");
                                 $createacountTextMail = str_replace("{{fullname}}", $fullname, $createacountTextMail);
 
-                                sendMail($createacountTextMail, $createacountHTMLMail, "You joined the Subtitle-a-thon Amsterdam event", $email);
+                                sendMail($createacountTextMail, $createacountHTMLMail, "You joined the Subtitle-a-thon Rome event", $email);
                             }
                         }
                     }
@@ -296,36 +304,45 @@ if (isset($_GET["action"])) {
             }
             break;
         case "eventdetails":
-            $conn = OpenCon();
             $response = array();
     
-            $sessionid = $conn->real_escape_string($_COOKIE['sessionid']);
+            if ($subaction !== "") {
+                $conn = OpenCon();
+        
+                $sessionid = $conn->real_escape_string($_COOKIE['sessionid']);
+                $eventid = $conn->real_escape_string($subaction);
+            
+                $sql = "SELECT s.userid, u.admin FROM sessions AS s LEFT JOIN users AS u ON s.userid = u.userid WHERE sessionid = '". $conn->real_escape_string($sessionid)."' AND created_at BETWEEN NOW() - INTERVAL 30 DAY AND NOW()";
+                $result = $conn->query($sql);
+        
+                //admin user is authenticated
+                if (mysqli_num_rows($result) === 1) {
+                    $row = $result->fetch_assoc();
+                        
+                    //check if the user is admin
+                    if ($row['admin'] == 1) {
+                        $sql = "SELECT * FROM events where eventid = ".$eventid;
+                        $result = $conn->query($sql);
 
-            $sql = "SELECT s.userid, u.admin FROM sessions AS s LEFT JOIN users AS u ON s.userid = u.userid WHERE sessionid = '". $conn->real_escape_string($sessionid)."' AND created_at BETWEEN NOW() - INTERVAL 30 DAY AND NOW()";
-            $result = $conn->query($sql);
-    
-            //admin user is authenticated
-            if (mysqli_num_rows($result) === 1) {
-                $row = $result->fetch_assoc();
-                    
-                //check if the user is admin
-                if ($row['admin'] == 1) {
-                    $sql = "SELECT * FROM events where registration_start_date < NOW() AND end_date > NOW()";
-                    $result = $conn->query($sql);
+                        if (mysqli_num_rows($result) > 0) {
+                            $row = $result->fetch_assoc();
+                            $response['success'] = $row;
 
-                    if (mysqli_num_rows($result) > 0) {
-                        $row = $result->fetch_assoc();
-                        $response['success'] = $row;
+                            $languages = explode(",",$row['allowed_languages']);
+                            $response['success']['allowed_languages'] = $languages;
 
-                        $languages = explode(",",$row['allowed_languages']);
-                        $response['success']['allowed_languages'] = $languages;
-
-                        CloseCon($conn);
-                        header('Content-Type: application/json');
-                        print(json_encode($response));
+                            CloseCon($conn);
+                            header('Content-Type: application/json');
+                            print(json_encode($response));
+                        } else {
+                            CloseCon($conn);
+                            $response['error']['user'] = "Not found";
+                            header('Content-Type: application/json');
+                            print(json_encode($response));
+                        }
                     } else {
                         CloseCon($conn);
-                        $response['error']['user'] = "Not found";
+                        $response['error']['user'] = "Not allowed";
                         header('Content-Type: application/json');
                         print(json_encode($response));
                     }
@@ -336,8 +353,7 @@ if (isset($_GET["action"])) {
                     print(json_encode($response));
                 }
             } else {
-                CloseCon($conn);
-                $response['error']['user'] = "Not allowed";
+                $response['error']['event'] = "key not given";
                 header('Content-Type: application/json');
                 print(json_encode($response));
             }
@@ -402,44 +418,52 @@ if (isset($_GET["action"])) {
             }
             break;
         case "getsubmittedvideos":
-            $conn = OpenCon();
             $response = array();
+
+            if ($subaction !== "") {
+                $conn = OpenCon();
         
-            $sessionid = $conn->real_escape_string($_COOKIE['sessionid']);
-            $eventid = $conn->real_escape_string($subaction);
+                $sessionid = $conn->real_escape_string($_COOKIE['sessionid']);
+                $eventid = $conn->real_escape_string($subaction);
     
-            $sql = "SELECT s.userid, u.admin FROM sessions AS s LEFT JOIN users AS u ON s.userid = u.userid WHERE sessionid = '". $conn->real_escape_string($sessionid)."' AND created_at BETWEEN NOW() - INTERVAL 30 DAY AND NOW()";
-            $result = $conn->query($sql);
+                $sql = "SELECT s.userid, u.admin FROM sessions AS s LEFT JOIN users AS u ON s.userid = u.userid WHERE sessionid = '". $conn->real_escape_string($sessionid)."' AND created_at BETWEEN NOW() - INTERVAL 30 DAY AND NOW()";
+                $result = $conn->query($sql);
         
-            //admin user is authenticated
-            if (mysqli_num_rows($result) === 1) {
-                $row = $result->fetch_assoc();
+                //admin user is authenticated
+                if (mysqli_num_rows($result) === 1) {
+                    $row = $result->fetch_assoc();
                         
-                //check if the user is admin
-                if ($row['admin'] == 1) {
-                    $sql = "SELECT i.id, i.item_key, i.eupsid, i.language, i.characters, i.manifest, i.eventid, i.itemid, i.reviewerid, i.review_done, i.review_quality, i.review_appropriate, i.review_flow, i.review_grammatical, i.review_comments, u.username FROM item_subtitles AS i LEFT JOIN users AS u ON i.userid = u.userid WHERE finalized = TRUE AND eventid =7";
-                    $result = $conn->query($sql);
+                    //check if the user is admin
+                    if ($row['admin'] == 1) {
+                        $sql = "SELECT i.id, i.item_key, i.eupsid, i.language, i.characters, i.manifest, i.eventid, i.itemid, i.reviewerid, i.review_done, i.review_quality, i.review_appropriate, i.review_flow, i.review_grammatical, i.review_comments, u.username FROM item_subtitles AS i LEFT JOIN users AS u ON i.userid = u.userid WHERE finalized = TRUE AND eventid = ".$eventid;
+                        $result = $conn->query($sql);
 
-                    $conn2 = OpenCon2();
+                        $conn2 = OpenCon2();
 
-                    while ($row = $result->fetch_assoc()) {
-                        $sql = "SELECT id FROM embeds WHERE videoid = '".$row['manifest']."' AND eupsid = '".$row['eupsid']."'";
-                        $result2 = $conn2->query($sql);
+                        while ($row = $result->fetch_assoc()) {
+                            $sql = "SELECT id FROM embeds WHERE videoid = '".$row['manifest']."' AND eupsid = '".$row['eupsid']."'";
+                            $result2 = $conn2->query($sql);
 
-                        if (mysqli_num_rows($result2) === 1) {
-                            $row2 = $result2->fetch_assoc();
-                            $row['embed'] = $row2['id'];
+                            if (mysqli_num_rows($result2) === 1) {
+                                $row2 = $result2->fetch_assoc();
+                                $row['embed'] = $row2['id'];
 
-                            $sql = "UPDATE embeds SET width = 640, height = 480 WHERE videoid = '".$row['manifest']."' AND eupsid = '".$row['eupsid']."'";
-                            $result3 = $conn2->query($sql);
+                                $sql = "UPDATE embeds SET width = 640, height = 480 WHERE videoid = '".$row['manifest']."' AND eupsid = '".$row['eupsid']."'";
+                                $result3 = $conn2->query($sql);
+                            }
+                            $response['results'][] = $row;
                         }
-                        $response['results'][] = $row;
-                    }
-                    CloseCon($conn);
-                    CloseCon($conn2);
+                        CloseCon($conn);
+                        CloseCon($conn2);
                     
-                    header('Content-Type: application/json');
-                    print(json_encode($response));
+                        header('Content-Type: application/json');
+                        print(json_encode($response));
+                    } else {
+                        CloseCon($conn);
+                        $response['error']['user'] = "Not allowed";
+                        header('Content-Type: application/json');
+                        print(json_encode($response));
+                    }
                 } else {
                     CloseCon($conn);
                     $response['error']['user'] = "Not allowed";
@@ -447,8 +471,7 @@ if (isset($_GET["action"])) {
                     print(json_encode($response));
                 }
             } else {
-                CloseCon($conn);
-                $response['error']['user'] = "Not allowed";
+                $response['error']['event'] = "key not given";
                 header('Content-Type: application/json');
                 print(json_encode($response));
             }
@@ -569,10 +592,10 @@ if (isset($_GET["action"])) {
                         $response['success']['message'] = $fullname;
 
                         // sent opening session details email
-                        $HTMLMail = file_get_contents("mail/templates/amsterdam/opening_session_details.html");
+                        $HTMLMail = file_get_contents("mail/templates/rome/opening_session_details.html");
                         $HTMLMail = str_replace("{{fullname}}", $fullname, $HTMLMail);
 
-                        $TextMail = file_get_contents("mail/templates/amsterdam/opening_session_details.txt");
+                        $TextMail = file_get_contents("mail/templates/rome/opening_session_details.txt");
                         $TextMail = str_replace("{{fullname}}", $fullname, $TextMail);
 
                         sendMail($TextMail, $HTMLMail, "Are you ready?", $email);
@@ -623,10 +646,10 @@ if (isset($_GET["action"])) {
                             $response['success']['message'] = $fullname;
     
                             // sent opening session details email
-                            $HTMLMail = file_get_contents("mail/templates/amsterdam/confirmation_link.html");
+                            $HTMLMail = file_get_contents("mail/templates/rome/confirmation_link.html");
                             $HTMLMail = str_replace("{{fullname}}", $fullname, $HTMLMail);
     
-                            $TextMail = file_get_contents("mail/templates/amsterdam/confirmation_link.txt");
+                            $TextMail = file_get_contents("mail/templates/rome/confirmation_link.txt");
                             $TextMail = str_replace("{{fullname}}", $fullname, $TextMail);
     
                             sendMail($TextMail, $HTMLMail, "Kick-off session details", $email);
@@ -688,8 +711,31 @@ if (isset($_GET["action"])) {
                     $manifestQueryParts = explode("=", $manifestUrl['query']);
                     $fileName = substr(urldecode($manifestQueryParts[1]), 0, strpos(urldecode($manifestQueryParts[1]), "?"))."_".substr($language, 0, 2).".vtt";
 
+                    //fix for more then 2 line breaks, vtt requires this to have the same timecode as multiple newlines are not supported
                     while ($row = $result->fetch_assoc()) {
-                        $subtitleFile .= "\r\n".formatTime($row['start'])." --> ".formatTime($row['end'])."\r\n".$row['text']."\r\n";
+                        if (preg_match_all("/(\\r\\n|\\r|\\n){2,}/", $row['text'], $matches, PREG_OFFSET_CAPTURE)) {
+                            $start = 0;
+
+                            print_r($row['text']);
+
+                            print_r($matches);
+
+                            foreach ($matches[0] as $key => $match) {
+                                $length = strlen(utf8_decode(substr($row['text'],$start,($match[1]-$start))));
+                                $text = trim(substr($row['text'],$start,$length));
+                                $start = $matches[1][$key][1];
+                                print("next start = ".$start."\r\n");
+
+                                $subtitleFile .= "\r\n".formatTime($row['start'])." --> ".formatTime($row['end'])."\r\n".$text."\r\n";
+                            }
+
+                            print("last start = ".$start."\r\n");
+                            $text = trim(substr($row['text'],$start));
+                            print("last text from ".$row['text']." = ".$text."\r\n");
+                            $subtitleFile .= "\r\n".formatTime($row['start'])." --> ".formatTime($row['end'])."\r\n".$text."\r\n";
+                        } else {
+                            $subtitleFile .= "\r\n".formatTime($row['start'])." --> ".formatTime($row['end'])."\r\n".$row['text']."\r\n";
+                        }
                     }
                     CloseCon($conn);
                     CloseCon($conn2);

@@ -1,18 +1,19 @@
-Hello {{fullname}},
+Ciao {{fullname}},
 
-Thank you for your registration!
+Grazie per la tua registrazione!
 
-Your application is being processed. Within 5 days you’ll get a message from us confirming if you can join us on Europeana XX: Subtitle-a-thon Challenge Amsterdam.
-Stay tuned!
+La tua domanda è in fase di elaborazione. Entro pochi giorni riceverai un messaggio da parte nostra che ti confermerà se puoi unirti a noi per l’Europeana XX: Subtitle-a-thon Challenge Rome.
 
-Questions? We’re here to help: subtitles@euscreen.eu 
+A presto!!
+
+Domande? Scrivici pure a: subtitleathon@cinecittaluce.it
 
 ------
 
-Bedankt voor het registreren!
+Thank you for your registration!
 
-Jouw aanvraag wordt verwerkt. Binnen 5 dagen ontvang je van ons een bevestiging of je mee kunt doen aan Europeana XX: Subtitle-a-thon Uitdaging Amsterdam.
+Your application is being processed. Within few days you’ll get a message from us confirming if you can join us on Europeana XX: Subtitle-a-thon Challenge Rome. 
 
-Blijf kijken!
+Stay tuned!
 
-Vragen? Wij zijn hier om te helpen: subtitles@euscreen.eu 
+Questions? We’re here to help: subtitleathon@cinecittaluce.it

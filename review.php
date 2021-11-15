@@ -35,7 +35,7 @@ if (isset($_GET["action"])) {
                 //check if the user is reviewer
                 if ($row['reviewer'] == true) {
                     $reviewerid = $row['userid'];
-                    $sql = "SELECT i.id, i.item_key, i.eupsid, i.language, i.characters, i.manifest, i.eventid, i.itemid, i.reviewerid, u.username FROM item_subtitles AS i LEFT JOIN users AS u ON i.userid = u.userid WHERE finalized = TRUE AND (eventid = 5 OR eventid = 6 OR eventid = 7) AND i.reviewerid = ".$reviewerid;
+                    $sql = "SELECT i.id, i.item_key, i.eupsid, i.language, i.characters, i.manifest, i.eventid, i.itemid, i.reviewerid, i.review_done, i.review_quality, i.review_appropriate, i.review_flow, i.review_grammatical, i.review_comments, u.username FROM item_subtitles AS i LEFT JOIN users AS u ON i.userid = u.userid WHERE finalized = TRUE AND (eventid = 5 OR eventid = 6 OR eventid = 7 OR eventid = 8) AND i.reviewerid = ".$reviewerid;
                     $result = $conn->query($sql);
 
                     while ($row = $result->fetch_assoc()) {

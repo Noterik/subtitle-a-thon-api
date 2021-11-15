@@ -1,5 +1,7 @@
 <?php
 
+chdir(dirname(__FILE__));
+
 include 'db_connect.php';
 
 $conn = OpenCon();
@@ -11,7 +13,7 @@ $result = $conn->query($sql);
 print(date("F j, Y, G:i:s").": ".mysqli_num_rows($result)." items deleted");
 
 //create statistics
-$sql = "SELECT characters, milliseconds FROM item_subtitles WHERE finalized = TRUE AND eventid = 7";
+$sql = "SELECT characters, milliseconds FROM item_subtitles WHERE finalized = TRUE AND eventid = 8";
 $result = $conn->query($sql);
 
 $characters = 0;
@@ -30,7 +32,7 @@ $data = array();
 $data['characters'] = $characters;
 $data['milliseconds'] = $milliseconds;
 
-$sql = "SELECT COUNT(DISTINCT language) AS languages FROM item_subtitles WHERE finalized = TRUE AND eventid = 7";
+$sql = "SELECT COUNT(DISTINCT language) AS languages FROM item_subtitles WHERE finalized = TRUE AND eventid = 8";
 $result = $conn->query($sql);
 
 if (mysqli_num_rows($result) == 1) {
@@ -38,17 +40,18 @@ if (mysqli_num_rows($result) == 1) {
     $data['languages'] = $row['languages'];
 }
 
-file_put_contents("/var/www/api.subtitleathon.eu/statistics_7.json", json_encode($data));
+file_put_contents("/var/www/api.subtitleathon.eu/statistics_8.json", json_encode($data));
 
 $sql = "select 
 t.username,
 t.characters
 from (
-select users.username, SUM(item_subtitles.characters) as characters
-from item_subtitles
-inner join users on item_subtitles.userid = users.userid
-where eventid =7 and finalized = true
-group by users.userid
+select u.username, SUM(i.characters) as characters
+from item_subtitles as i
+inner join users as u on i.userid = u.userid
+inner join events as e on e.eventid = 8
+where i.eventid = 8 and i.finalized = true and i.subtitle_submitted < e.end_date
+group by u.userid
 order by characters DESC LIMIT 5
 ) t";
 $result = $conn->query($sql);
@@ -62,7 +65,7 @@ if (mysqli_num_rows($result) > 0) {
     }
 }
 
-file_put_contents("/var/www/api.subtitleathon.eu/leaderboard_7.json", json_encode($data));
+file_put_contents("/var/www/api.subtitleathon.eu/leaderboard_8.json", json_encode($data));
 
 $sql2 = "select
     username,
@@ -85,7 +88,7 @@ $string = file_get_contents("lang.json");
 $json = json_decode($string, true);
 $languages = $json['locales'];
 
-$europeanaAPIUrl= "https://api.europeana.eu/set/2171.json?wskey=api2demo&profile=itemDescriptions";
+$europeanaAPIUrl= "https://api.europeana.eu/set/3595.json?wskey=api2demo&profile=itemDescriptions";
 $collection = file_get_contents($europeanaAPIUrl);
 $collectionJson = json_decode($collection, true);
 $items = $collectionJson['items'];
@@ -100,11 +103,13 @@ t.review_flow,
 t.review_grammatical, 
 t.review_comments, 
 t.username,
+t.fullname,
 t.reviewerid,
 t.itemid
 from (
     select 
     u.username, 
+    r.fullname,
     i.characters, 
     i.language, 
     i.review_done, 
@@ -116,8 +121,10 @@ from (
     i.reviewerid,
     i.itemid
     from item_subtitles as i
-    inner join users as u on i.userid = u.userid
-    where i.eventid = 7 and i.finalized = true
+    inner join users as u on i.userid = u.userid 
+    inner join registrations as r on u.email = r.email
+    inner join events as e on e.eventid = 8
+    where i.eventid = 8 and i.finalized = true and i.subtitle_submitted < e.end_date
 ) t";
 
 $result = $conn->query($sql);

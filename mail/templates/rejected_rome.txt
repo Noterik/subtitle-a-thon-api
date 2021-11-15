@@ -1,0 +1,15 @@
+Ciao {{fullname}},
+
+Sei in lista d'attesa...
+
+Purtroppo l'elenco dei partecipanti selezionati per l’Europeana XX: Subtitle-a-thon Challenge Rome è già completo. Vi terremo informati se la situazione dovesse cambiare. Grazie per l’interesse dimostrato.
+
+Domande? Scrivici pure a: subtitleathon@cinecittaluce.it
+
+------
+
+You are on a waiting list…
+
+Unfortunately, the list of selected participants for the Europeana XX: Subtitle-a-thon Challenge Rome is already complete. We will keep you informed if the situation changes. Thanks for your interest.
+
+Questions? We’re always here to help: subtitleathon@cinecittaluce.it

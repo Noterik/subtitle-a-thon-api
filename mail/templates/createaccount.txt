@@ -1,15 +1,17 @@
-Hello {{fullname}},
+Ciao {{fullname}},
 
-As one of the selected participants we ask you to do one last step before the Amsterdam Subtitle-a-thon Challenge can start. 
-Fill in the details on this sign up page https://www.subtitleathon.eu/sign-up?id={{signup_hash}} to complete your account and get ready for our opening session on Sunday 26th at 15:00 CEST. Please make sure you have your account created before we kick off on Sunday.
+Come partecipante selezionato, ti chiediamo di fare un ultimo passo prima dell’inizio della Rome Subtitle-a-thon Challenge.
 
-Didn’t get a link to the meeting yet? No worries. We’re here to help: subtitles@euscreen.eu
+Compila i dettagli su questa pagina di registrazione https://www.subtitleathon.eu/sign-up?id={{signup_hash}} per completare il tuo account e preparati per la nostra sessione di apertura sabato 23 ottobre alle 11:00 CET. Assicurati di aver creato il tuo account prima dell’incontro di sabato.
+
+Non hai ancora ricevuto il link per il meeting? Nessun problema. Siamo qui per aiutarti: subtitleathon@cinecittaluce.it
 
 ------
 
-Hallo {{fullname}},
+Hello {{fullname}},
 
-Als een van de geselecteerde deelnemers vragen we je nog een laatste stap te doen voordat de Amsterdam Subtitle-a-thon Uitdaging kan beginnen.
-Vul de details op deze aanmeldingspagina in https://www.subtitleathon.eu/sign-up?id={{signup_hash}} om je account te voltooien en je voor te bereiden op onze openingssessie. Zorg ervoor dat je je account hebt aangemaakt voordat we op zondag beginnen.
+As one of the selected participants, we ask you to do one last step before the Rome Subtitle-a-thon Challenge can start.
 
-Nog geen link naar de meeting ontvangen? Geen zorgen. Wij zijn hier om te helpen: subtitles@euscreen.eu
+Fill in the details on this sign-up page https://www.subtitleathon.eu/sign-up?id={{signup_hash}} to complete your account and get ready for our opening session on Saturday the 23rd of October at 11:00 CET. Please make sure you have your account created before we kick off on Saturday.
+
+Didn’t get a link to the meeting yet? No worries. We’re here to help: subtitleathon@cinecittaluce.it

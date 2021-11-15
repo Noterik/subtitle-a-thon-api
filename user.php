@@ -330,7 +330,7 @@ if (isset($_GET["action"])) {
             
             $sessionid = $_COOKIE['sessionid'];
 
-            $sql = "SELECT s.userid, u.username, u.email, u.admin, u.reviewer FROM sessions AS s LEFT JOIN users AS u ON s.userid = u.userid WHERE sessionid = '". $conn->real_escape_string($sessionid)."' AND created_at BETWEEN NOW() - INTERVAL 30 DAY AND NOW()";
+            $sql = "SELECT s.userid, u.username, u.email, u.admin, u.reviewer, u.admin_event FROM sessions AS s LEFT JOIN users AS u ON s.userid = u.userid WHERE sessionid = '". $conn->real_escape_string($sessionid)."' AND created_at BETWEEN NOW() - INTERVAL 30 DAY AND NOW()";
             $result = $conn->query($sql);
 
             if (mysqli_num_rows($result) === 1) {
@@ -348,6 +348,9 @@ if (isset($_GET["action"])) {
                 }
                 if (boolval($row['reviewer'])) {
                     $response['success']['reviewer'] = true;
+                }
+                if (!is_null($row['admin_event'])) {
+                    $response['success']['admin_event'] = $row['admin_event'];
                 }
 
                 header('Content-Type: application/json');
@@ -600,10 +603,10 @@ if (isset($_GET["action"])) {
                 $row = $result->fetch_assoc();
                 
                 //allow existing registrations to register also for other events
-                if ($row['eventid'] == "7") {
+                if ($row['eventid'] == "8") {
                     $response['error']['email'] = "Email address already in use";
                 } else {
-                    $sql = "UPDATE registrations SET eventid = 7, accepted = FALSE, rejected = FALSE, fullname = '".$fullname."', nationality = '".$nationality."', native_languages = '".$nativelanguages."', foreign_languages = '".$foreignlanguages."' WHERE email = '".$email."'";
+                    $sql = "UPDATE registrations SET eventid = 8, accepted = FALSE, rejected = FALSE, fullname = '".$fullname."', nationality = '".$nationality."', native_languages = '".$nativelanguages."', foreign_languages = '".$foreignlanguages."' WHERE email = '".$email."'";
 
                     $result = $conn->query($sql);
                 
@@ -629,7 +632,7 @@ if (isset($_GET["action"])) {
                 print(json_encode($response));
                 break; 
             } else {
-                $sql = "INSERT INTO registrations(fullname, email, nationality, native_languages, foreign_languages, eventid) VALUES ('".$fullname."', '".$email."', '".$nationality."', '".$nativelanguages."', '".$foreignlanguages."', 7)";
+                $sql = "INSERT INTO registrations(fullname, email, nationality, native_languages, foreign_languages, eventid) VALUES ('".$fullname."', '".$email."', '".$nationality."', '".$nativelanguages."', '".$foreignlanguages."', 8)";
                 $result = $conn->query($sql);
                 
                 if(!$result) {

@@ -239,7 +239,7 @@ if (isset($_GET["action"])) {
                     $result = $conn->query($sql);
 
                     if (mysqli_num_rows($result) > 0) {
-                        $sql = "UPDATE item_subtitles SET finalized = true, eupsid = '".$eupsid."' WHERE userid = ".$userid." AND item_key = '".$key."'";
+                        $sql = "UPDATE item_subtitles SET finalized = true, eupsid = '".$eupsid."', subtitle_submitted = NOW() WHERE userid = ".$userid." AND item_key = '".$key."'";
                         $result = $conn->query($sql);
                     
                         if ($result === false) {
