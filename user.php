@@ -700,40 +700,46 @@ if (isset($_GET["action"])) {
                 $response = array();
     
                 if ($subaction !== "") {
+                    $listEvents = explode(",", $subaction);
                     $conn = OpenCon();
-                    $eventid = $conn->real_escape_string($subaction);
-    
-                    $sql = "SELECT * FROM events WHERE eventid = ".$eventid;
-                    $result = $conn->query($sql);
-    
-                    //event exists and is joinable
-                    if (mysqli_num_rows($result) > 0) {
-                        $row = $result->fetch_assoc();
-                        $europeana_collection = $row['europeana_collection'];
-                        $title = $row['title'];
-                        
-                        CloseCon($conn);
-    
-                        $url = $europeanaAPIPreUrl . $europeana_collection . $europeanaAPIPostURL;
-                        $content = file_get_contents($url);
-                        if ($content !== FALSE) {
-                            $json = json_decode($content);
-                            $json->title = $title;
-    
-                            header('Content-Type: application/json');
-                            print(json_encode($json));
-                        } else {
-                            $response['error']['event'] = "Event not found on Europeana";
-                            header('Content-Type: application/json');
-                            print(json_encode($response));
+
+                    $completeJson;
+
+                    for ($i = 0; $i < count($listEvents); $i++) {   
+                        $eventid = $conn->real_escape_string($listEvents[$i]);
+
+                        $sql = "SELECT * FROM events WHERE eventid = ".$eventid;
+                        $result = $conn->query($sql);
+        
+                        //event exist
+                        if (mysqli_num_rows($result) > 0) {
+                            $row = $result->fetch_assoc();
+                            $europeana_collection = $row['europeana_collection'];
+                            $title = $row['title'];
+                            
+                            $url = $europeanaAPIPreUrl . $europeana_collection . $europeanaAPIPostURL;
+                            $content = file_get_contents($url);
+                            if ($content !== FALSE) {
+                                $json = json_decode($content, true);
+                                
+                                if ($completeJson === null) {
+                                    $json['title'] = $title;
+                                    $completeJson = $json;
+                                } else {
+                                    $completeJson['items'] = array_merge($completeJson['items'], $json['items']);
+                                }
+                            }
                         }
-                    } else {
-                        CloseCon($conn);
-    
-                        $response['error']['event'] =  "Event not found or active";
-                        header('Content-Type: application/json');
-                        print(json_encode($response));
                     }
+
+                    if ($completeJson === null) {
+                       $completeJson = $response['error']['event'] = "Event not found";
+                    }
+
+                    CloseCon($conn);
+
+                    header('Content-Type: application/json');
+                    print(json_encode($completeJson));
                 } else {
                     $response['error']['event'] =  "Event id not defined";
                     header('Content-Type: application/json');

@@ -122,7 +122,26 @@ if (isset($_GET["action"])) {
                             $response['success']['key'] = $row['item_key'];
                             $response['success']['user'] = "User successfully reserved subtitle";
                         } else {
-                            $response['error']['item'] = "Item already reserved";
+                            //$response['error']['item'] = "Item already reserved";
+                            //allow multiple users to reserve same subtitle
+                            $key = generateKey();
+                            $sql = "INSERT INTO item_subtitles (userid, eventid, itemid, language, item_key) VALUES (".$userid.", ".$eventid.", '".$itemid."', '".$language."', '".$key."')";
+                            $result = $conn->query($sql);
+
+                            if ($result === false) {
+                                CloseCon($conn);
+                                $response['error']['user'] = "Could not reserve subtitle";
+                                header('Content-Type: application/json');
+                                print(json_encode($response));
+                                break;
+                            } else {
+                                CloseCon($conn);
+                                $response['success']['key'] = $key;
+                                $response['success']['user'] = "User successfully reserved subtitle";
+                                header('Content-Type: application/json');
+                                print(json_encode($response));
+                                break;
+                            }
                         }
                         CloseCon($conn);
                         header('Content-Type: application/json');
@@ -144,6 +163,7 @@ if (isset($_GET["action"])) {
                             $response['success']['user'] = "User successfully reserved subtitle";
                             header('Content-Type: application/json');
                             print(json_encode($response));
+                            break;
                         }                    
                     }
                 } else {
